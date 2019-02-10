@@ -7,28 +7,24 @@ module.exports = (robot) => {
   // joking word here with response you should write '@"bot name" open the [write any thing here] doors'
     robot.respond(/open the (.*) doors/i, (res) => {
       const doorType = res.match[1]
-    
       if (doorType === 'pod bay') {
         res.reply('I’m afraid I can’t let you do that.')
         return
       }
-    
       res.reply(`Opening ${doorType} doors`)
     })
-
   // here will bot respond to you random of below words
     const lulz = ['lol', 'rofl', 'lmao']
-  
     robot.respond(`/${lulz.join('|')}/i`, (res) => {
       res.send(res.random(lulz))
     })
     
   
     const toDoList = {
-      'morning': ['Drink Coffee ', 'Send Fuel forecast email ', 'write latter to stakeholder ', 'meeting with team '],
-      'after noon': ['Lunch ', 'Call mama ', 'Send plant performance email '],
-      'evening': ['Coffee time with family ', 'Write Code ', 'Review JS '],
-      'night': ['Watch movie or play music ', 'Dinner ', 'write task for tomorrow ']
+      'morning': [' Drink Coffee ', ' Send Fuel forecast email ', ' write latter to stakeholder ', ' meeting with team '],
+      'after noon': [' Lunch ', ' Call mama ', ' Send plant performance email '],
+      'evening': [' Coffee time with family ', ' Write Code ', ' Review JS '],
+      'night': [' Watch movie or play music ', ' Dinner ', ' write task for tomorrow ']
     }
   // just type @"bot name" my task morning || after noon || evening || night
     robot.respond(/my task (.*)/i, (res) => {
@@ -68,13 +64,22 @@ module.exports = (robot) => {
         res.send(res.random(moodToday['studing']))
         return
       }
-      })
+    })
     // here will robot will remind you the class on class day and before class starting and that
     // when you are active in chanel by typing any thing 
     var now = new Date();
     robot.hear(/(.*)/i, (res) => {
-      if((now.getDay() == 1 || 3) && now.getHours() == (Math.floor(Math.random()*18))){
-        res.send('REMINDER: YOU HAVE CLASS TODAY')
-    }
-  })
+        if((now.getDay() == 1 || 3) && now.getHours() == (Math.floor(Math.random()*18))){
+            res.send('REMINDER: YOU HAVE CLASS TODAY')
+        }
+    })
+    // Error handling
+    robot.error((error, response) => {
+        const message = `DOES NOT COMPUTE: ${error.toString()}`
+        robot.logger.error(message)
+    
+        if (response) {
+        response.reply(message)
+        }
+    })
   }
