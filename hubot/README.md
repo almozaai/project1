@@ -104,7 +104,7 @@ This code select randomly music based on your mood.
  here  robot will remind you the class on class day and before class starting and that when you are active in chanel by typing any thing.
 `now.getHours() == (Math.floor(Math.random()*19))` this code randomly take # between 1-18 and compare it with ***current time*** by this avoid noising message [by repeating reminder message after each line type] and probability to get remind message is high.
 
-### Sixth Code
+### Seventh Code
 ```sh
 robot.error((error, response) => {
         const message = `DOES NOT COMPUTE: ${error.toString()}`
